@@ -36,11 +36,11 @@ export function Rooms() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-2xl">
-            <span className="inline-block px-4 py-1.5 mb-5 text-xs font-bold tracking-widest uppercase bg-primary/10 text-primary rounded-full">
-              Rooms
-            </span>
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-5">
-              Designed for Your <span className="text-primary italic">Ambition</span>
+            <div className="badge-accent inline-flex items-center px-4 py-2 rounded-full mb-5">
+              <span className="text-sm font-bold tracking-wide">Rooms</span>
+            </div>
+            <h2 className="font-heading text-4xl md:text-5xl font-bold tracking-tight mb-5 text-foreground">
+              Designed for Your <span className="italic text-accent">Ambition</span>
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
               Every room is a sanctuary. From biometric door locks to ergonomic workstations, we've optimized every square inch for your lifestyle.
@@ -49,13 +49,13 @@ export function Rooms() {
           <div className="flex items-center gap-4">
             <div className="flex -space-x-3">
               {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="w-10 h-10 rounded-full border-[3px] border-background bg-accent overflow-hidden shadow-md">
+                <div key={i} className="w-10 h-10 rounded-full border-[3px] border-background bg-secondary overflow-hidden warm-shadow">
                   <img src={`https://i.pravatar.cc/150?u=room${i}`} alt="resident" />
                 </div>
               ))}
             </div>
             <div className="flex flex-col justify-center">
-              <span className="text-sm font-bold tracking-tighter">Joined by 1.2k+</span>
+              <span className="text-sm font-bold font-heading tracking-tighter text-foreground">Joined by 1.2k+</span>
               <span className="text-xs text-muted-foreground font-medium">Happy Professionals</span>
             </div>
           </div>
@@ -63,10 +63,14 @@ export function Rooms() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {rooms.map((room, index) => (
-            <Card key={index} className={`group relative overflow-hidden rounded-3xl border-2 transition-all duration-300 hover:shadow-xl ${room.popular ? 'border-primary' : 'border-border/60 hover:border-primary/30'}`}>
+            <Card key={index} className={`group relative overflow-hidden rounded-3xl border transition-all duration-400 hover:-translate-y-1 hover:warm-shadow-xl ${
+              room.popular
+                ? 'border-accent/50 bg-card'
+                : 'border-border/50 hover:border-border bg-card'
+            }`}>
               {room.popular && (
                 <div className="absolute top-4 right-4 z-10">
-                  <div className="bg-primary text-primary-foreground px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-md flex items-center gap-1.5">
+                  <div className="btn-gradient px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest warm-shadow flex items-center gap-1.5">
                     <Zap className="w-3 h-3 fill-current" />
                     Bestseller
                   </div>
@@ -78,28 +82,26 @@ export function Rooms() {
                   <img
                     src={room.image}
                     alt={room.type}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                 </div>
               </CardHeader>
 
               <CardContent className="p-6 pt-2">
-                <div className="flex items-center gap-2 mb-3">
-                  <Badge variant="secondary" className="text-[10px] font-black uppercase tracking-tighter rounded-lg px-2 py-0.5">
-                    {room.tagline}
-                  </Badge>
-                </div>
-                <h3 className="text-2xl font-black mb-4 group-hover:text-primary transition-colors">{room.type}</h3>
+                <Badge variant="secondary" className="badge-accent text-[10px] font-black uppercase tracking-wider rounded-lg px-2.5 py-0.5 mb-3">
+                  {room.tagline}
+                </Badge>
+                <h3 className="font-heading text-2xl font-bold mb-4 group-hover:text-accent transition-colors">{room.type}</h3>
 
                 <div className="flex items-baseline gap-1 mb-6">
-                  <span className="text-3xl font-black text-primary">{room.price}</span>
+                  <span className="text-3xl font-black font-heading text-accent">{room.price}</span>
                   <span className="text-muted-foreground font-medium text-sm">/mo</span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-y-3 gap-x-2">
                   {room.features.map((feature, idx) => (
                     <div key={idx} className="flex items-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-green-500 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
                       <span className="text-xs font-semibold text-muted-foreground">{feature}</span>
                     </div>
                   ))}
@@ -107,7 +109,21 @@ export function Rooms() {
               </CardContent>
 
               <CardFooter className="p-6 pt-2">
-                <Button className={`w-full h-12 rounded-xl text-sm font-bold transition-all active:scale-95 ${room.popular ? 'shadow-md shadow-primary/15' : 'bg-accent text-foreground hover:bg-accent/80'}`} variant={room.popular ? 'default' : 'secondary'}>
+                <Button
+                  onClick={() => {
+                    sessionStorage.setItem(
+                      "prefilledMessage",
+                      `I'm interested in the ${room.type} (${room.tagline}) option. Please share more details and availability.`
+                    );
+                    const el = document.getElementById("contact-form");
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className={`w-full h-12 rounded-xl text-sm font-bold transition-all duration-300 active:scale-95 ${
+                    room.popular
+                      ? 'btn-gradient'
+                      : 'bg-secondary text-foreground hover:bg-secondary/80'
+                  }`}
+                >
                   Book Exclusive Tour
                 </Button>
               </CardFooter>

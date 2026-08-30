@@ -30,13 +30,15 @@ const faqs = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="py-24 md:py-32 bg-background">
-      <div className="max-w-3xl mx-auto px-6">
+    <section id="faq" className="py-24 md:py-32 bg-background relative">
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/8 rounded-full blur-[150px] pointer-events-none" />
+
+      <div className="max-w-3xl mx-auto px-6 relative z-10">
         <div className="flex flex-col items-center text-center mb-16">
-          <span className="inline-block px-4 py-1.5 mb-5 text-xs font-bold tracking-widest uppercase bg-primary/10 text-primary rounded-full">
-            FAQ
-          </span>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-5">
+          <div className="badge-accent inline-flex items-center px-4 py-2 rounded-full mb-5">
+            <span className="text-sm font-bold tracking-wide">FAQ</span>
+          </div>
+          <h2 className="font-heading text-4xl md:text-5xl font-bold tracking-tight mb-5 text-foreground">
             Got Questions?
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl">
@@ -49,9 +51,9 @@ export function FAQ() {
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className="border border-border/60 rounded-2xl overflow-hidden transition-all duration-300 data-[state=open]:border-primary/30 data-[state=open]:shadow-md"
+              className="border border-border/50 rounded-2xl overflow-hidden bg-card transition-all duration-300 data-[state=open]:border-accent/30 data-[state=open]:warm-shadow data-[state=open]:bg-card"
             >
-              <AccordionTrigger className="cursor-pointer flex flex-1 items-center justify-between py-5 px-6 text-left text-base font-semibold transition-all hover:no-underline hover:text-primary [&[data-state=open]>svg]:rotate-180">
+              <AccordionTrigger className="cursor-pointer flex flex-1 items-center justify-between py-5 px-6 text-left text-base font-semibold transition-all hover:no-underline hover:text-accent [&[data-state=open]>svg]:text-accent font-heading">
                 <span className="pr-4">{faq.question}</span>
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground text-sm leading-relaxed px-6 pb-5 pt-0">
@@ -61,15 +63,18 @@ export function FAQ() {
           ))}
         </Accordion>
 
-        <div className="mt-14 p-6 rounded-2xl bg-accent/50 border flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-14 p-6 rounded-2xl bg-secondary border border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-center md:text-left">
-            <h4 className="text-base font-bold mb-1">Still have more questions?</h4>
+            <h4 className="text-base font-bold mb-1 font-heading text-foreground">Still have more questions?</h4>
             <p className="text-sm text-muted-foreground">Our concierge team is here to help you 24/7.</p>
           </div>
-          <button onClick={() => {
-            const el = document.getElementById("contact-form");
-            if (el) el.scrollIntoView({ behavior: "smooth" });
-          }} className="px-6 py-2.5 bg-foreground text-background rounded-full font-bold text-sm transition-all hover:scale-105 active:scale-95 shrink-0">
+          <button
+            onClick={() => {
+              const el = document.getElementById("contact-form");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="btn-gradient px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 active:scale-95 shrink-0"
+          >
             Chat with us
           </button>
         </div>

@@ -42,13 +42,13 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="py-24 bg-accent/30 overflow-hidden">
+    <section className="py-24 bg-background overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1.5 mb-5 text-xs font-bold tracking-widest uppercase bg-primary/10 text-primary rounded-full">
-            Testimonials
-          </span>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+          <div className="badge-accent inline-flex items-center px-4 py-2 rounded-full mb-5">
+            <span className="text-sm font-bold tracking-wide">Testimonials</span>
+          </div>
+          <h2 className="font-heading text-4xl md:text-5xl font-bold tracking-tight text-foreground">
             What Our Residents Say
           </h2>
         </div>
@@ -64,23 +64,23 @@ export function Testimonials() {
             <CarouselContent>
               {testimonials.map((t, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 p-3">
-                  <Card className="h-full border-0 shadow-lg rounded-2xl bg-background">
+                  <Card className="h-full border-0 warm-shadow-lg rounded-2xl bg-card">
                     <CardContent className="p-6 flex flex-col h-full">
                       <div className="flex gap-0.5 mb-4">
                         {[...Array(t.rating)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                          <Star key={i} className="w-4 h-4 fill-accent text-accent" />
                         ))}
                       </div>
-                      <p className="text-base leading-relaxed mb-6 grow italic text-foreground/80">
+                      <p className="text-base leading-relaxed mb-6 grow text-foreground/80">
                         "{t.content}"
                       </p>
                       <div className="flex items-center gap-3 mt-auto">
-                        <Avatar className="w-10 h-10 border-2 border-primary/10">
+                        <Avatar className="w-10 h-10 border-2 border-accent/20">
                           <AvatarImage src={t.avatar} />
-                          <AvatarFallback>{t.name[0]}</AvatarFallback>
+                          <AvatarFallback className="bg-accent/10 text-accent font-bold text-xs">{t.name[0]}</AvatarFallback>
                         </Avatar>
                         <div>
-                          <h4 className="font-bold text-sm">{t.name}</h4>
+                          <h4 className="font-bold text-sm text-foreground">{t.name}</h4>
                           <p className="text-xs text-muted-foreground">{t.role}</p>
                         </div>
                       </div>
@@ -89,8 +89,8 @@ export function Testimonials() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="-left-4 md:-left-8 w-10 h-10 border-2 hover:bg-primary hover:text-primary-foreground transition-all" />
-            <CarouselNext className="-right-4 md:-right-8 w-10 h-10 border-2 hover:bg-primary hover:text-primary-foreground transition-all" />
+            <CarouselPrevious className="-left-4 md:-left-8 w-10 h-10 border-2 border-border hover:bg-accent hover:text-accent-foreground hover:border-accent transition-all rounded-full" />
+            <CarouselNext className="-right-4 md:-right-8 w-10 h-10 border-2 border-border hover:bg-accent hover:text-accent-foreground hover:border-accent transition-all rounded-full" />
           </Carousel>
         </div>
       </div>

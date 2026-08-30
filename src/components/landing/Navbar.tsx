@@ -1,4 +1,3 @@
-// Navbar - sticky top navigation
 import { useState, useEffect } from "react";
 import { Menu, Home, Info, Bed, Users, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -33,10 +32,6 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isActive = (href: string) => {
-    return href === "/";
-  };
-
   const scrollToForm = () => {
     const el = document.getElementById("contact-form");
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -55,48 +50,39 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 sm:px-6",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-400 px-4 sm:px-6",
         isScrolled
-          ? "py-3 bg-background/80 backdrop-blur-md border-b shadow-sm"
-          : "py-4 bg-transparent",
+          ? "py-3 glass-nav border-b border-border/40 shadow-sm"
+          : "py-4 bg-transparent"
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
         <Logo name="Parallel Stays PG" />
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-8">
           <div className="flex items-center gap-8">
-            {navItems.map((item) => {
-              const active = isActive(item.href);
-              return (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className={cn(
-                    "text-sm font-medium transition-colors relative",
-                    active
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-primary"
-                  )}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick(item);
-                  }}
-                >
-                  {item.name}
-                  {active && !item.href.startsWith("#") && (
-                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full" />
-                  )}
-                </a>
-              );
-            })}
+            {navItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className={cn(
+                  "text-sm font-medium transition-colors",
+                  isScrolled ? "nav-text" : "text-foreground/70 hover:text-accent"
+                )}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(item);
+                }}
+              >
+                {item.name}
+              </a>
+            ))}
           </div>
           <div className="flex items-center gap-3 ml-4">
             <ModeToggle />
             <Button
               size="sm"
-              className="rounded-full px-6 shadow-md hover:shadow-lg transition-all active:scale-95"
+              className="btn-gradient rounded-full px-6 font-bold text-sm"
               onClick={scrollToForm}
             >
               Book Now
@@ -104,53 +90,39 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         <div className="md:hidden flex items-center gap-2">
           <ModeToggle />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full h-9 w-9">
+              <Button variant="ghost" size="icon" className={cn("rounded-full h-10 w-10", isScrolled && "nav-text-dark")}>
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[85vw] sm:w-100">
+            <SheetContent side="right" className="w-[85vw] sm:w-100 bg-background">
               <SheetHeader className="border-b pb-4">
                 <SheetTitle>
                   <Logo name="Parallel Stays PG" />
                 </SheetTitle>
               </SheetHeader>
-              <div className="flex flex-col gap-2 mt-6">
-                {navItems.map((item) => {
-                  const active = isActive(item.href);
-                  return (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className={cn(
-                        "flex items-center gap-3 text-base font-medium p-3 rounded-lg transition-colors",
-                        active
-                          ? "bg-primary/10 text-primary"
-                          : "hover:bg-accent"
-                      )}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavClick(item);
-                      }}
-                    >
-                      <item.icon
-                        className={cn(
-                          "h-5 w-5",
-                          active ? "text-primary" : "text-muted-foreground"
-                        )}
-                      />
-                      {item.name}
-                    </a>
-                  );
-                })}
+              <div className="flex flex-col gap-1 mt-6">
+                {navItems.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="flex items-center gap-3 text-base font-medium p-3 rounded-xl transition-colors hover:bg-accent/10 text-foreground"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(item);
+                    }}
+                  >
+                    <item.icon className="h-5 w-5 text-muted-foreground" />
+                    {item.name}
+                  </a>
+                ))}
 
                 <div className="mt-6 pt-6 border-t space-y-3">
                   <Button
-                    className="w-full rounded-lg"
+                    className="w-full btn-gradient rounded-xl"
                     onClick={scrollToForm}
                   >
                     Book Now

@@ -1,18 +1,18 @@
-import { useRef, type FormEvent } from "react";
+import { useRef, useEffect, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { 
-  MapPin, 
-  Phone, 
+import {
+  MapPin,
+  Phone,
   Mail,
   Send
 } from "lucide-react";
-import { 
-  FaInstagram, 
-  FaFacebookF, 
-  FaTwitter, 
-  FaLinkedinIn 
+import {
+  FaInstagram,
+  FaFacebookF,
+  FaTwitter,
+  FaLinkedinIn
 } from "react-icons/fa";
 import { Logo } from "@/src/components/Logo";
 
@@ -25,6 +25,22 @@ const socialLinks = [
 
 export function Footer() {
   const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    const textarea = document.getElementById("contact-message") as HTMLTextAreaElement | null;
+    if (!textarea) return;
+
+    const interval = setInterval(() => {
+      const prefilled = sessionStorage.getItem("prefilledMessage");
+      if (prefilled && !textarea.value) {
+        textarea.value = prefilled;
+        sessionStorage.removeItem("prefilledMessage");
+        clearInterval(interval);
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -50,51 +66,51 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-background pt-24 pb-12 border-t">
+    <footer className="bg-foreground pt-24 pb-12">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 mb-16 lg:mb-20">
           <div>
             <div className="flex items-center gap-2 mb-6">
-              <Logo />
+              <Logo className="text-white" />
             </div>
-            <p className="text-muted-foreground text-lg mb-8 max-w-md">
+            <p className="text-white/60 text-lg mb-8 max-w-md leading-relaxed">
               Premium studio rooms for modern professionals and students. Located in the heart of Whitefield, Bengaluru.
             </p>
-            
+
             <div className="space-y-4">
               <div className="flex items-center gap-4 group">
-                <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5 text-primary" />
+                <div className="w-10 h-10 rounded-full bg-white/8 flex items-center justify-center shrink-0 group-hover:bg-accent/20 transition-colors">
+                  <MapPin className="w-5 h-5 text-accent" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-muted-foreground text-sm">Kalidas Road, 10, Pattandur Agrahara Village Main Rd, Whitefield, Bengaluru - 560066</span>
-                  <a 
-                    href="https://maps.app.goo.gl/8xFvwBYGGCCPHaZd8" 
-                    target="_blank" 
+                  <span className="text-white/60 text-sm">Kalidas Road, 10, Pattandur Agrahara Village Main Rd, Whitefield, Bengaluru - 560066</span>
+                  <a
+                    href="https://maps.app.goo.gl/8xFvwBYGGCCPHaZd8"
+                    target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary text-xs font-bold hover:underline mt-1 w-fit"
+                    className="text-accent text-xs font-bold hover:underline mt-1 w-fit"
                   >
                     View on Google Maps
                   </a>
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
-                  <Phone className="w-5 h-5 text-primary" />
+                <div className="w-10 h-10 rounded-full bg-white/8 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                  <Phone className="w-5 h-5 text-accent" />
                 </div>
-                <span className="text-muted-foreground">+91 80505 26162</span>
+                <span className="text-white/60">+91 80505 26162</span>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
-                  <Mail className="w-5 h-5 text-primary" />
+                <div className="w-10 h-10 rounded-full bg-white/8 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                  <Mail className="w-5 h-5 text-accent" />
                 </div>
-                <span className="text-muted-foreground">contact@parallelstays.com</span>
+                <span className="text-white/60">contact@parallelstays.com</span>
               </div>
             </div>
 
-            <div className="flex gap-4 mt-10">
+            <div className="flex gap-3 mt-10">
               {socialLinks.map((social, i) => (
-                <Button key={i} variant="outline" size="icon" className="rounded-full hover:bg-primary hover:text-primary-foreground transition-all">
+                <Button key={i} variant="ghost" size="icon" className="rounded-full bg-white/8 hover:bg-accent hover:text-primary-foreground text-white transition-all border-0">
                   <social.icon className="w-5 h-5" />
                   <span className="sr-only">{social.label}</span>
                 </Button>
@@ -102,30 +118,30 @@ export function Footer() {
             </div>
           </div>
 
-          <div id="contact-form" className="bg-accent/50 p-6 sm:p-10 rounded-[2rem] sm:rounded-[2.5rem] border">
-            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Have Questions? Drop a Message</h3>
+          <div id="contact-form" className="bg-white/8 p-6 sm:p-10 rounded-[2rem] sm:rounded-[2.5rem] border border-white/10 warm-shadow-lg">
+            <h3 className="font-heading text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-white">Have Questions? Drop a Message</h3>
             <form ref={formRef} className="space-y-4" onSubmit={handleSubmit}>
               <div className="grid sm:grid-cols-2 gap-4">
-                <Input name="name" placeholder="Your Name" className="h-12 rounded-xl bg-background border-none focus-visible:ring-primary" />
-                <Input name="email" type="email" placeholder="Email Address" className="h-12 rounded-xl bg-background border-none focus-visible:ring-primary" />
+                <Input name="name" placeholder="Your Name" className="h-12 rounded-xl bg-white/8 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-accent focus-visible:border-accent/30" />
+                <Input name="email" type="email" placeholder="Email Address" className="h-12 rounded-xl bg-white/8 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-accent focus-visible:border-accent/30" />
               </div>
-              <Input name="phone" placeholder="Phone Number" className="h-12 rounded-xl bg-background border-none focus-visible:ring-primary" />
-              <Textarea name="message" placeholder="How can we help you?" className="min-h-30 rounded-xl bg-background border-none focus-visible:ring-primary resize-none" />
-              <Button type="submit" className="w-full h-12 rounded-xl font-bold gap-2 shadow-lg shadow-primary/10">
+              <Input name="phone" placeholder="Phone Number" className="h-12 rounded-xl bg-white/8 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-accent focus-visible:border-accent/30" />
+              <Textarea name="message" id="contact-message" placeholder="How can we help you?" className="min-h-30 rounded-xl bg-white/8 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-accent focus-visible:border-accent/30 resize-none" />
+              <Button type="submit" className="w-full h-12 btn-gradient rounded-xl font-bold gap-2">
                 <Send className="w-4 h-4" /> Send Message
               </Button>
             </form>
           </div>
         </div>
 
-        <div className="pt-12 border-t flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-muted-foreground text-sm">
-            © 2026 Parallel Stays Studio Rooms. All rights reserved.
+        <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-white/40 text-sm">
+            &copy; 2026 Parallel Stays Studio Rooms. All rights reserved.
           </p>
-          <div className="flex gap-8 text-sm font-medium text-muted-foreground">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-primary transition-colors">Refund Policy</a>
+          <div className="flex gap-8 text-sm font-medium text-white/40">
+            <a href="#" className="hover:text-accent transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-accent transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-accent transition-colors">Refund Policy</a>
           </div>
         </div>
       </div>

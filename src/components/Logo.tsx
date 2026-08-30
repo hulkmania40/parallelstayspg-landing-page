@@ -20,18 +20,18 @@ export function Logo({ className, name = "Parallel Stays PG" }: LogoProps) {
           fill="none"
           className="w-full h-full"
         >
-          <rect width="32" height="32" rx="8" fill="currentColor" className="text-primary" />
+          <rect width="32" height="32" rx="8" fill="currentColor" />
           <path
             d="M6 12L16 6L26 12V24C26 24.5523 25.5523 25 25 25H7C6.44772 25 6 24.5523 6 24V12Z"
             fill="white"
           />
-          <rect x="13" y="17" width="6" height="8" rx="1" fill="currentColor" className="text-primary" />
-          <circle cx="16" cy="13.5" r="1.5" fill="currentColor" className="text-primary" />
+          <rect x="13" y="17" width="6" height="8" rx="1" fill="currentColor" />
+          <circle cx="16" cy="13.5" r="1.5" fill="currentColor" />
         </svg>
       </div>
 
       <div className="flex flex-col leading-none">
-        <span className="text-sm font-bold tracking-tight text-foreground whitespace-nowrap">
+        <span className="text-sm font-bold tracking-tight whitespace-nowrap">
           {name}
         </span>
       </div>
