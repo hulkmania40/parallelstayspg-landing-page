@@ -1,24 +1,16 @@
 // components/Logo.tsx
 import { cn } from "@/lib/utils";
-import { useSidebarState } from "@/components/ui/sidebar";
 
 interface LogoProps {
   className?: string;
-  collapseAware?: boolean;
   name?: string;
 }
 
-export function Logo({ className, collapseAware = false, name }: LogoProps) {
-  const sidebar = useSidebarState();
-  const isCollapsed = collapseAware && sidebar?.state === "collapsed";
-
-  const displayName = name || "PG";
-
+export function Logo({ className, name = "Parallel Stays PG" }: LogoProps) {
   return (
     <div
       className={cn(
-        "flex items-center select-none",
-        isCollapsed ? "justify-center w-full" : "gap-2.5",
+        "flex items-center gap-2.5 select-none",
         className
       )}
     >
@@ -38,12 +30,9 @@ export function Logo({ className, collapseAware = false, name }: LogoProps) {
         </svg>
       </div>
 
-      <div className={cn(
-        "flex flex-col leading-none transition-all duration-200",
-        isCollapsed ? "w-0 opacity-0 overflow-hidden" : "w-auto opacity-100"
-      )}>
+      <div className="flex flex-col leading-none">
         <span className="text-sm font-bold tracking-tight text-foreground whitespace-nowrap">
-          {displayName}
+          {name}
         </span>
       </div>
     </div>

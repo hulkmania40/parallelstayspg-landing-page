@@ -5,11 +5,13 @@ import { Community } from "./components/landing/Community"
 import { Testimonials } from "./components/landing/Testimonials"
 import { FAQ } from "./components/landing/FAQ"
 import { Footer } from "./components/landing/Footer"
+import { Navbar } from "./components/landing/Navbar"
 import { Fragment } from "react/jsx-runtime"
 
 const LandingPage = () => {
     return (
         <Fragment>
+            <Navbar />
             <Hero />
             <Amenities />
             <Rooms />

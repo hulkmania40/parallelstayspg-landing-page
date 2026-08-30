@@ -4,7 +4,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { HelpCircle } from "lucide-react";
 
 const faqs = [
   {
@@ -31,15 +30,14 @@ const faqs = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="py-24 bg-background">
+    <section id="faq" className="py-24 md:py-32 bg-background">
       <div className="max-w-3xl mx-auto px-6">
         <div className="flex flex-col items-center text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6">
-            <HelpCircle className="w-3.5 h-3.5" />
-            Support Center
-          </div>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
-            Got Questions? <br /> We've Got Answers
+          <span className="inline-block px-4 py-1.5 mb-5 text-xs font-bold tracking-widest uppercase bg-primary/10 text-primary rounded-full">
+            FAQ
+          </span>
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-5">
+            Got Questions?
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl">
             Everything you need to know about your future home. Can't find what you're looking for? Reach out to our support team.
@@ -48,29 +46,27 @@ export function FAQ() {
 
         <Accordion type="single" collapsible className="w-full space-y-3">
           {faqs.map((faq, index) => (
-            <AccordionItem 
-              key={index} 
+            <AccordionItem
+              key={index}
               value={`item-${index}`}
-              className="group border border-border/60 rounded-2xl overflow-hidden transition-all duration-300 data-[state=open]:border-primary/30 data-[state=open]:bg-primary/2 data-[state=open]:shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:data-[state=open]:shadow-[0_8px_30px_rgb(0,0,0,0.2)]"
+              className="border border-border/60 rounded-2xl overflow-hidden transition-all duration-300 data-[state=open]:border-primary/30 data-[state=open]:shadow-md"
             >
-              <AccordionTrigger className="cursor-pointer flex flex-1 items-center justify-between py-6 px-6 text-left text-lg font-semibold transition-all hover:no-underline hover:text-primary [&[data-state=open]>svg]:rotate-45">
+              <AccordionTrigger className="cursor-pointer flex flex-1 items-center justify-between py-5 px-6 text-left text-base font-semibold transition-all hover:no-underline hover:text-primary [&[data-state=open]>svg]:rotate-180">
                 <span className="pr-4">{faq.question}</span>
               </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground text-[16px] leading-relaxed px-6 pb-6 pt-0 animate-in fade-in slide-in-from-top-2 duration-300">
-                <div className="border-t border-border/40 pt-4 mt-1">
-                  {faq.answer}
-                </div>
+              <AccordionContent className="text-muted-foreground text-sm leading-relaxed px-6 pb-5 pt-0">
+                {faq.answer}
               </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
 
-        <div className="mt-12 p-8 rounded-3xl bg-accent/30 border border-dashed border-border flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-14 p-6 rounded-2xl bg-accent/50 border flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-center md:text-left">
-            <h4 className="text-lg font-bold mb-1">Still have more questions?</h4>
+            <h4 className="text-base font-bold mb-1">Still have more questions?</h4>
             <p className="text-sm text-muted-foreground">Our concierge team is here to help you 24/7.</p>
           </div>
-          <button className="px-8 py-3 bg-foreground text-background dark:bg-primary dark:text-primary-foreground rounded-full font-bold text-sm transition-all hover:scale-105 active:scale-95 shadow-lg">
+          <button className="px-6 py-2.5 bg-foreground text-background rounded-full font-bold text-sm transition-all hover:scale-105 active:scale-95 shrink-0">
             Chat with us
           </button>
         </div>

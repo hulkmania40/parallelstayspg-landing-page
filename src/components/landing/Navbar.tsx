@@ -1,6 +1,6 @@
-// components/landing/Navbar.tsx
+// Navbar - sticky top navigation
 import { useState, useEffect } from "react";
-import { Menu, Home, Info, Bed, Users, MessageSquare, ArrowLeft } from "lucide-react";
+import { Menu, Home, Info, Bed, Users, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/src/components/theme/mode-toggle";
 import {
@@ -14,18 +14,12 @@ import { cn } from "@/lib/utils";
 import { Logo } from "@/src/components/Logo";
 import { useLocation, useNavigate } from "react-router";
 
-// Navigation items for landing page
-const landingNavItems = [
+const navItems = [
   { name: "Home", href: "/", icon: Home },
   { name: "Amenities", href: "#amenities", icon: Info },
   { name: "Rooms", href: "#rooms", icon: Bed },
   { name: "Community", href: "#community", icon: Users },
   { name: "FAQ", href: "#faq", icon: MessageSquare },
-];
-
-// Navigation items for login page
-const loginNavItems = [
-  { name: "Back to Home", href: "/", icon: ArrowLeft },
 ];
 
 export function Navbar() {
@@ -42,34 +36,14 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Determine which nav items to show
-  const getNavItems = () => {
-    if (location.pathname === "/login") {
-      return loginNavItems;
-    }
-    return landingNavItems;
-  };
-
-  // Check if a nav item is active
   const isActive = (href: string) => {
-    if (href === "/") {
-      return location.pathname === "/";
-    }
-    if (href.startsWith("#")) {
-      // For hash links, check if we're on the home page
-      return location.pathname === "/";
-    }
+    if (href === "/") return location.pathname === "/";
+    if (href.startsWith("#")) return location.pathname === "/";
     return location.pathname === href;
-  };
-
-  // Check if we should show action buttons (Book Now, Login)
-  const showActionButtons = () => {
-    return location.pathname !== "/login";
   };
 
   const handleNavClick = (item: { href: string; name: string }) => {
     setIsOpen(false);
-    
     if (item.href.startsWith("#")) {
       const element = document.querySelector(item.href);
       if (element) {
@@ -80,18 +54,17 @@ export function Navbar() {
     }
   };
 
-  const navItems = getNavItems();
-  const isLoginPage = location.pathname === "/login";
-
   return (
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 sm:px-6",
-        isScrolled || isLoginPage ? "py-3 bg-background/80 backdrop-blur-md border-b shadow-sm" : "py-4 bg-transparent",
+        isScrolled
+          ? "py-3 bg-background/80 backdrop-blur-md border-b shadow-sm"
+          : "py-4 bg-transparent",
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Logo />
+        <Logo name="Parallel Stays PG" />
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
@@ -104,8 +77,8 @@ export function Navbar() {
                   href={item.href}
                   className={cn(
                     "text-sm font-medium transition-colors relative",
-                    active 
-                      ? "text-primary" 
+                    active
+                      ? "text-primary"
                       : "text-muted-foreground hover:text-primary"
                   )}
                   onClick={(e) => {
@@ -123,25 +96,13 @@ export function Navbar() {
           </div>
           <div className="flex items-center gap-3 ml-4">
             <ModeToggle />
-            {showActionButtons() && (
-              <>
-                <Button 
-                  size="sm" 
-                  className="rounded-full px-6 shadow-md hover:shadow-lg transition-all active:scale-95"
-                  onClick={() => navigate("/book-now")}
-                >
-                  Book Now
-                </Button>
-                <Button 
-                  size="sm" 
-                  variant="outline" 
-                  className="rounded-full px-6 shadow-md hover:shadow-lg transition-all active:scale-95"
-                  onClick={() => navigate("/login")}
-                >
-                  Login
-                </Button>
-              </>
-            )}
+            <Button
+              size="sm"
+              className="rounded-full px-6 shadow-md hover:shadow-lg transition-all active:scale-95"
+              onClick={() => navigate("/book-now")}
+            >
+              Book Now
+            </Button>
           </div>
         </div>
 
@@ -157,7 +118,7 @@ export function Navbar() {
             <SheetContent side="right" className="w-[85vw] sm:w-100">
               <SheetHeader className="border-b pb-4">
                 <SheetTitle>
-                  <Logo />
+                  <Logo name="Parallel Stays PG" />
                 </SheetTitle>
               </SheetHeader>
               <div className="flex flex-col gap-2 mt-6">
@@ -169,8 +130,8 @@ export function Navbar() {
                       href={item.href}
                       className={cn(
                         "flex items-center gap-3 text-base font-medium p-3 rounded-lg transition-colors",
-                        active 
-                          ? "bg-primary/10 text-primary" 
+                        active
+                          ? "bg-primary/10 text-primary"
                           : "hover:bg-accent"
                       )}
                       onClick={(e) => {
@@ -178,38 +139,28 @@ export function Navbar() {
                         handleNavClick(item);
                       }}
                     >
-                      <item.icon className={cn(
-                        "h-5 w-5",
-                        active ? "text-primary" : "text-muted-foreground"
-                      )} />
+                      <item.icon
+                        className={cn(
+                          "h-5 w-5",
+                          active ? "text-primary" : "text-muted-foreground"
+                        )}
+                      />
                       {item.name}
                     </a>
                   );
                 })}
-                
-                {showActionButtons() && (
-                  <div className="mt-6 pt-6 border-t space-y-3">
-                    <Button 
-                      className="w-full rounded-lg"
-                      onClick={() => {
-                        navigate("/book-now");
-                        setIsOpen(false);
-                      }}
-                    >
-                      Book Now
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      className="w-full rounded-lg"
-                      onClick={() => {
-                        navigate("/login");
-                        setIsOpen(false);
-                      }}
-                    >
-                      Login
-                    </Button>
-                  </div>
-                )}
+
+                <div className="mt-6 pt-6 border-t space-y-3">
+                  <Button
+                    className="w-full rounded-lg"
+                    onClick={() => {
+                      navigate("/book-now");
+                      setIsOpen(false);
+                    }}
+                  >
+                    Book Now
+                  </Button>
+                </div>
               </div>
             </SheetContent>
           </Sheet>

@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/carousel";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
-import { Quote, Star } from "lucide-react";
+import { Star } from "lucide-react";
 
 const testimonials = [
   {
@@ -45,11 +45,15 @@ export function Testimonials() {
     <section className="py-24 bg-accent/30 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-primary font-semibold tracking-wider uppercase text-sm mb-3">Testimonials</h2>
-          <p className="text-4xl md:text-5xl font-bold tracking-tight">What Our Residents Say</p>
+          <span className="inline-block px-4 py-1.5 mb-5 text-xs font-bold tracking-widest uppercase bg-primary/10 text-primary rounded-full">
+            Testimonials
+          </span>
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+            What Our Residents Say
+          </h2>
         </div>
 
-        <div className="relative px-12">
+        <div className="relative px-0 md:px-12">
           <Carousel
             opts={{
               align: "start",
@@ -59,25 +63,24 @@ export function Testimonials() {
           >
             <CarouselContent>
               {testimonials.map((t, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 p-4">
-                  <Card className="h-full border-none shadow-xl rounded-[2.5rem] bg-background">
-                    <CardContent className="p-10 flex flex-col h-full">
-                      <Quote className="w-10 h-10 text-primary/10 mb-6 shrink-0" />
-                      <div className="flex gap-1 mb-6">
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 p-3">
+                  <Card className="h-full border-0 shadow-lg rounded-2xl bg-background">
+                    <CardContent className="p-6 flex flex-col h-full">
+                      <div className="flex gap-0.5 mb-4">
                         {[...Array(t.rating)].map((_, i) => (
                           <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                         ))}
                       </div>
-                      <p className="text-lg leading-relaxed mb-8 grow italic">
+                      <p className="text-base leading-relaxed mb-6 grow italic text-foreground/80">
                         "{t.content}"
                       </p>
-                      <div className="flex items-center gap-4 mt-auto">
-                        <Avatar className="w-12 h-12 border-2 border-primary/10">
+                      <div className="flex items-center gap-3 mt-auto">
+                        <Avatar className="w-10 h-10 border-2 border-primary/10">
                           <AvatarImage src={t.avatar} />
                           <AvatarFallback>{t.name[0]}</AvatarFallback>
                         </Avatar>
                         <div>
-                          <h4 className="font-bold">{t.name}</h4>
+                          <h4 className="font-bold text-sm">{t.name}</h4>
                           <p className="text-xs text-muted-foreground">{t.role}</p>
                         </div>
                       </div>
@@ -86,8 +89,8 @@ export function Testimonials() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="-left-6 w-12 h-12 border-2 hover:bg-primary hover:text-primary-foreground transition-all" />
-            <CarouselNext className="-right-6 w-12 h-12 border-2 hover:bg-primary hover:text-primary-foreground transition-all" />
+            <CarouselPrevious className="-left-4 md:-left-8 w-10 h-10 border-2 hover:bg-primary hover:text-primary-foreground transition-all" />
+            <CarouselNext className="-right-4 md:-right-8 w-10 h-10 border-2 hover:bg-primary hover:text-primary-foreground transition-all" />
           </Carousel>
         </div>
       </div>

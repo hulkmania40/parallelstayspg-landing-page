@@ -62,45 +62,35 @@ const amenities = [
 
 export function Amenities() {
   return (
-    <section id="amenities" className="py-32 relative overflow-hidden bg-background">
-      {/* Decorative Background Elements */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] -z-10" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] -z-10" />
-
+    <section id="amenities" className="py-24 md:py-32 relative overflow-hidden bg-background">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-20 relative">
-          <div className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest uppercase bg-primary/10 text-primary rounded-full">
-            Premium Living
-          </div>
-          <h2 className="text-4xl md:text-6xl font-extrabold mb-8 tracking-tight bg-clip-text text-transparent bg-linear-to-b from-foreground to-foreground/70">
-            Unrivaled Amenities <br className="hidden sm:block" /> For Modern Life
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="inline-block px-4 py-1.5 mb-5 text-xs font-bold tracking-widest uppercase bg-primary/10 text-primary rounded-full">
+            Amenities
+          </span>
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-5 tracking-tight">
+            Everything You Need,
+            <span className="text-primary"> All in One Place</span>
           </h2>
-          <p className="text-muted-foreground text-xl leading-relaxed">
-            We've redefined co-living by combining luxury hotel services with the warmth of a home.
-            Experience facilities designed for the next generation.
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            Modern facilities designed for comfort, productivity, and peace of mind.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {amenities.map((item, index) => (
             <div
               key={index}
-              className="group relative p-8 bg-card/50 backdrop-blur-sm rounded-[2.5rem] border border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.05)] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)] overflow-hidden"
+              className="group relative p-6 bg-card rounded-2xl border border-border/60 hover:border-primary/40 hover:shadow-lg transition-all duration-300"
             >
-              {/* Hover Accent */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -translate-y-16 translate-x-16 group-hover:bg-primary/10 transition-colors duration-500" />
-
-              <div className={`w-16 h-16 rounded-[1.5rem] ${item.color} flex items-center justify-center mb-8 shadow-inner group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
-                <item.icon className="w-8 h-8" />
+              <div className={`w-12 h-12 rounded-xl ${item.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
+                <item.icon className="w-6 h-6" />
               </div>
 
-              <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">{item.title}</h3>
-              <p className="text-muted-foreground leading-relaxed font-medium">
+              <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
                 {item.description}
               </p>
-
-              {/* Bottom Decorative Line */}
-              <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary group-hover:w-full transition-all duration-700" />
             </div>
           ))}
         </div>
