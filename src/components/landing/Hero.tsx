@@ -1,6 +1,10 @@
 import { Button } from "@/components/ui/button";
 
 export function Hero() {
+  const scrollToForm = () => {
+    const el = document.getElementById("contact-form");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <section className="relative min-h-[90vh] flex items-center pt-24 pb-20 overflow-hidden bg-background">
       {/* Background Gradients */}
@@ -26,7 +30,7 @@ export function Hero() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-              <Button size="lg" className="rounded-2xl px-8 text-base h-14 font-bold shadow-xl shadow-primary/15 hover:shadow-primary/30 transition-all active:scale-95">
+              <Button size="lg" onClick={scrollToForm} className="rounded-2xl px-8 text-base h-14 font-bold shadow-xl shadow-primary/15 hover:shadow-primary/30 transition-all active:scale-95">
                 Reserve Your Room
               </Button>
               <a href="https://maps.app.goo.gl/8xFvwBYGGCCPHaZd8" target="_blank" rel="noopener noreferrer">
@@ -64,31 +68,31 @@ export function Hero() {
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-            </div>
 
-            {/* Floating Badge - Biometric */}
-            <div className="absolute -top-4 -left-4 sm:-top-6 sm:-left-6 z-10 bg-background/95 backdrop-blur-xl p-4 sm:p-5 rounded-2xl shadow-xl border border-border/60">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+              {/* Floating Badge - Biometric */}
+              <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10 bg-background/95 backdrop-blur-xl p-3 sm:p-5 rounded-2xl shadow-xl border border-border/60">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-green-500/10 flex items-center justify-center">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>
+                  </div>
+                  <div>
+                    <p className="text-[11px] sm:text-sm font-black leading-tight">Biometric Gate</p>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground font-medium leading-tight hidden sm:block">100% Secure Access</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-black">Biometric Gate</p>
-                  <p className="text-xs text-muted-foreground font-medium">100% Secure Access</p>
+              </div>
+
+              {/* Floating Badge - Location */}
+              <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-10 bg-primary px-4 py-3 sm:px-5 sm:py-4 rounded-2xl shadow-xl">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+                  <span className="font-black tracking-tight text-xs sm:text-sm text-primary-foreground">ITPL Whitefield</span>
                 </div>
               </div>
             </div>
 
-            {/* Floating Badge - Location */}
-            <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 z-10 bg-primary px-5 py-4 rounded-2xl shadow-xl">
-              <div className="flex items-center gap-3">
-                <svg className="w-5 h-5 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
-                <span className="font-black tracking-tight text-sm text-primary-foreground">ITPL Whitefield Hub</span>
-              </div>
-            </div>
-
-            {/* Decorative blur */}
-            <div className="absolute -top-16 -right-16 -z-10 w-48 h-48 bg-primary/10 rounded-full blur-[60px]" />
+            {/* Decorative blur - hidden on small mobile */}
+            <div className="hidden sm:block absolute -top-16 -right-16 -z-10 w-48 h-48 bg-primary/10 rounded-full blur-[60px]" />
           </div>
         </div>
       </div>

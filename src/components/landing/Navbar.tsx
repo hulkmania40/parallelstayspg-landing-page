@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/src/components/Logo";
-import { useLocation, useNavigate } from "react-router";
 
 const navItems = [
   { name: "Home", href: "/", icon: Home },
@@ -25,8 +24,6 @@ const navItems = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,9 +34,12 @@ export function Navbar() {
   }, []);
 
   const isActive = (href: string) => {
-    if (href === "/") return location.pathname === "/";
-    if (href.startsWith("#")) return location.pathname === "/";
-    return location.pathname === href;
+    return href === "/";
+  };
+
+  const scrollToForm = () => {
+    const el = document.getElementById("contact-form");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleNavClick = (item: { href: string; name: string }) => {
@@ -49,8 +49,6 @@ export function Navbar() {
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
       }
-    } else {
-      navigate(item.href);
     }
   };
 
@@ -63,7 +61,7 @@ export function Navbar() {
           : "py-4 bg-transparent",
       )}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
         <Logo name="Parallel Stays PG" />
 
         {/* Desktop Navigation */}
@@ -99,7 +97,7 @@ export function Navbar() {
             <Button
               size="sm"
               className="rounded-full px-6 shadow-md hover:shadow-lg transition-all active:scale-95"
-              onClick={() => navigate("/book-now")}
+              onClick={scrollToForm}
             >
               Book Now
             </Button>
@@ -153,10 +151,7 @@ export function Navbar() {
                 <div className="mt-6 pt-6 border-t space-y-3">
                   <Button
                     className="w-full rounded-lg"
-                    onClick={() => {
-                      navigate("/book-now");
-                      setIsOpen(false);
-                    }}
+                    onClick={scrollToForm}
                   >
                     Book Now
                   </Button>

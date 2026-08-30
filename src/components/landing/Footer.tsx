@@ -52,7 +52,7 @@ export function Footer() {
   return (
     <footer className="bg-background pt-24 pb-12 border-t">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-20 mb-20">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 mb-16 lg:mb-20">
           <div>
             <div className="flex items-center gap-2 mb-6">
               <Logo />
@@ -102,8 +102,8 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="bg-accent/50 p-10 rounded-[2.5rem] border">
-            <h3 className="text-2xl font-bold mb-6">Have Questions? Drop a Message</h3>
+          <div id="contact-form" className="bg-accent/50 p-6 sm:p-10 rounded-[2rem] sm:rounded-[2.5rem] border">
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Have Questions? Drop a Message</h3>
             <form ref={formRef} className="space-y-4" onSubmit={handleSubmit}>
               <div className="grid sm:grid-cols-2 gap-4">
                 <Input name="name" placeholder="Your Name" className="h-12 rounded-xl bg-background border-none focus-visible:ring-primary" />

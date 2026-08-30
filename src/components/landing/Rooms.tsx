@@ -34,7 +34,7 @@ export function Rooms() {
   return (
     <section id="rooms" className="py-24 md:py-32 bg-background relative">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-2xl">
             <span className="inline-block px-4 py-1.5 mb-5 text-xs font-bold tracking-widest uppercase bg-primary/10 text-primary rounded-full">
               Rooms
@@ -46,7 +46,7 @@ export function Rooms() {
               Every room is a sanctuary. From biometric door locks to ergonomic workstations, we've optimized every square inch for your lifestyle.
             </p>
           </div>
-          <div className="flex gap-4">
+          <div className="flex items-center gap-4">
             <div className="flex -space-x-3">
               {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="w-10 h-10 rounded-full border-[3px] border-background bg-accent overflow-hidden shadow-md">

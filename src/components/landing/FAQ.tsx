@@ -66,7 +66,10 @@ export function FAQ() {
             <h4 className="text-base font-bold mb-1">Still have more questions?</h4>
             <p className="text-sm text-muted-foreground">Our concierge team is here to help you 24/7.</p>
           </div>
-          <button className="px-6 py-2.5 bg-foreground text-background rounded-full font-bold text-sm transition-all hover:scale-105 active:scale-95 shrink-0">
+          <button onClick={() => {
+            const el = document.getElementById("contact-form");
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+          }} className="px-6 py-2.5 bg-foreground text-background rounded-full font-bold text-sm transition-all hover:scale-105 active:scale-95 shrink-0">
             Chat with us
           </button>
         </div>
