@@ -14,7 +14,7 @@ export function Logo({ className, name = "Parallel Stays PG" }: LogoProps) {
         className
       )}
     >
-      <div className="relative flex items-center justify-center w-8 h-8 shrink-0">
+      <div className="relative flex items-center justify-center w-8 h-8 shrink-0 logo-icon">
         <svg
           viewBox="0 0 32 32"
           fill="none"

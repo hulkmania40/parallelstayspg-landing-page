@@ -317,15 +317,16 @@
 }
 
 /* Logo: dark text+icon in navbar glass, light in footer */
-.glass-nav .logo-text {
+.glass-nav .logo-text,
+.glass-nav .logo-icon {
   color: rgba(28, 25, 23, 0.9);
 }
-.glass-nav .logo-text svg {
+.dark .glass-nav .logo-text,
+.dark .glass-nav .logo-icon {
   color: rgba(28, 25, 23, 0.9);
 }
-.dark .glass-nav .logo-text {
-  color: rgba(28, 25, 23, 0.9);
-}
-.dark .glass-nav .logo-text svg {
+
+/* Icons (sun/moon) on light glass-nav in dark mode — force dark color */
+.dark .glass-nav svg {
   color: rgba(28, 25, 23, 0.9);
 }
