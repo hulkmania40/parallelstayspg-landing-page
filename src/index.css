@@ -310,3 +310,22 @@
   background: oklch(0.16 0.02 260);
   color: oklch(0.94 0.008 85);
 }
+
+/* Text on always-light surfaces (glass-nav, glass-card) — force dark regardless of theme */
+.text-on-light {
+  color: rgba(28, 25, 23, 0.88);
+}
+
+/* Logo: dark text+icon in navbar glass, light in footer */
+.glass-nav .logo-text {
+  color: rgba(28, 25, 23, 0.9);
+}
+.glass-nav .logo-text svg {
+  color: rgba(28, 25, 23, 0.9);
+}
+.dark .glass-nav .logo-text {
+  color: rgba(28, 25, 23, 0.9);
+}
+.dark .glass-nav .logo-text svg {
+  color: rgba(28, 25, 23, 0.9);
+}

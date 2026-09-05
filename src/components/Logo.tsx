@@ -10,7 +10,7 @@ export function Logo({ className, name = "Parallel Stays PG" }: LogoProps) {
   return (
     <div
       className={cn(
-        "flex items-center gap-2.5 select-none",
+        "flex items-center gap-2.5 select-none logo-text",
         className
       )}
     >
@@ -31,7 +31,7 @@ export function Logo({ className, name = "Parallel Stays PG" }: LogoProps) {
       </div>
 
       <div className="flex flex-col leading-none">
-        <span className="text-sm font-bold tracking-tight whitespace-nowrap">
+        <span className="text-sm font-bold tracking-tight whitespace-nowrap logo-text">
           {name}
         </span>
       </div>
