@@ -230,6 +230,17 @@
   color: rgba(28, 25, 23, 0.95);
 }
 
+/* In dark mode the glass nav background is still light — keep text dark */
+.dark .glass-nav .nav-text {
+  color: rgba(28, 25, 23, 0.72);
+}
+.dark .glass-nav .nav-text:hover {
+  color: var(--accent);
+}
+.dark .glass-nav .nav-text-dark {
+  color: rgba(28, 25, 23, 0.95);
+}
+
 @keyframes float-slow {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33% { transform: translate(25px, -25px) scale(1.04); }
@@ -292,4 +303,10 @@
   background: linear-gradient(135deg, oklch(0.52 0.10 190 / 0.1) 0%, oklch(0.52 0.10 190 / 0.05) 100%);
   border: 1px solid oklch(0.52 0.10 190 / 0.2);
   color: oklch(0.40 0.08 190);
+}
+
+/* Footer is intentionally dark — force dark bg */
+.footer-dark {
+  background: oklch(0.16 0.02 260);
+  color: oklch(0.94 0.008 85);
 }
